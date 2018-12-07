@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1050157544247",
+    "firebase_url": "https://polygoal2.firebaseio.com",
+    "project_id": "polygoal2",
+    "storage_bucket": "polygoal2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050157544247:android:0c6ec0d5bbd003cd",
+        "android_client_info": {
+          "package_name": "com.android.yunbumhan.polygoal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050157544247-dcl1vm8roge0obqc7m21h5kf9rg59clt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.yunbumhan.polygoal",
+            "certificate_hash": "29aa10ebdadbb370c3ffba700bf035230a83800c"
+          }
+        },
+        {
+          "client_id": "1050157544247-v8ioqfvna7mpda2u2o6r3983eehfjmq6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB7gvzSyK-bycISeLmz0xalg4CMnoimFE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050157544247-v8ioqfvna7mpda2u2o6r3983eehfjmq6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
