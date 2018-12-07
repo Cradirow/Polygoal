@@ -9,10 +9,7 @@
     </style>
 
     <style name="Splash" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/splash_draw</item>
     </style>
 
 </resources>

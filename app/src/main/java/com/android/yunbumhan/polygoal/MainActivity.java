@@ -1,14 +1,15 @@
 package com.android.yunbumhan.polygoal;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Picture;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         buttonGoogle = findViewById(R.id.googleSignInBtn);
+        ImageView img = findViewById(R.id.gif_background);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -51,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
+
+        GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(img);
+        Glide.with(this).load(R.raw.background).into(img);
+
     }
 
     @Override
