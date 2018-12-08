@@ -34,15 +34,100 @@
         android:visibility="invisible"/>
 
     <Button
+        android:id="@+id/btnPolygonPhysical"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="200dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/button_background"
         android:text="건강"
-        android:textSize="30dp"/>
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btnPolygonWork"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.05"
+        android:background="@drawable/button_background"
+        android:text="일"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btnPolygonSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.9"
+        android:background="@drawable/button_background"
+        android:text="사람"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btnPolygonPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:background="@drawable/button_background"
+        android:text="놀이"
+        android:textSize="20dp"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/btnPolygonActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.75"
+        android:background="@drawable/button_background"
+        android:text="취미"
+        android:textSize="20dp"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/btnPolygonMyself"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:background="@drawable/button_background"
+        android:text="자신"
+        android:textSize="20dp"
+        android:visibility="invisible"/>
+    
+    <com.android.yunbumhan.polygoal.Polygon
+        android:id="@+id/polygon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.7"/>
 
     <noman.weekcalendar.WeekCalendar
         android:id="@+id/weekCalendar"
