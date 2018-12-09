@@ -7,6 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".Main2Activity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFBC1D"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/Theme.AppCompat.Light"/>
+
     <EditText
         android:id="@+id/titleEdit"
         android:layout_width="300dp"

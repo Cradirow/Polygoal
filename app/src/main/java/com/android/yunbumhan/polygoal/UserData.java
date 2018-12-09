@@ -5,7 +5,6 @@ public class UserData {
     private String polygon;
 
     public UserData(){
-
     }
 
     public UserData(String email, String polygon){

@@ -24,8 +24,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -100,15 +103,27 @@ public class MainActivity extends AppCompatActivity {
                             firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                             if(firebaseUser == null) Log.d("TAG", "user doesn't exist.");
                             else{
-                                String userId = firebaseUser.getUid();
-                                String email = firebaseUser.getEmail();
-                                Log.d("TAG", userId);
-                                Date from = new Date();
-                                SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                String date = transFormat.format(from);
-                                writeNewUser(userId, email, date);
+                                conditionRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if(dataSnapshot.hasChild("Email")){
+                                            Log.d("TAG", "user data is exists");
+                                        }else{
+                                            String userId = firebaseUser.getUid();
+                                            String email = firebaseUser.getEmail();
+                                            Log.d("TAG", userId);
+                                            Date from = new Date();
+                                            SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                            String date = transFormat.format(from);
+                                            writeNewUser(userId, email, date);
 
-                                Log.d("TAG", "user data created and saved.");
+                                            Log.d("TAG", "user data created and saved.");
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    }
+                                });
                             }
 
                             Intent intent = new Intent(MainActivity.this, Main2Activity.class);
@@ -123,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
     private void writeNewUser(String userId, String email, String date){
         //UserData userData = new UserData(email, "000000");
         conditionRef.child(userId).child("Email").setValue(email);
-        conditionRef.child(userId).child("Polygon").child(date).setValue("000000");
+        conditionRef.child(userId).child("Email").setValue(email);
+        conditionRef.child(userId).child("Polygon").child(date).setValue("000");
     }
 
 }
