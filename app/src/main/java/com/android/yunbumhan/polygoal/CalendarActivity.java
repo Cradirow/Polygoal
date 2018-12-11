@@ -32,17 +32,21 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CalendarActivity extends AppCompatActivity {
 
+    private TextView titleView;
     private TextView textView;
-    private int day;
+    //private int day;
 
     private String polygonType;
     private String date;
+
+    private String currentSelectDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        titleView = findViewById(R.id.titleView);
         textView = findViewById(R.id.textView);
 
         CalendarView calendarView = findViewById(R.id.calendarView);
@@ -50,9 +54,10 @@ public class CalendarActivity extends AppCompatActivity {
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                //Toast.makeText(getApplicationContext(), ""+dayOfMonth, Toast.LENGTH_SHORT).show();
-                day = dayOfMonth;
-                
+                //day = dayOfMonth;
+                currentSelectDate = parsePickerDate(year, month, dayOfMonth);
+                Toast.makeText(getApplicationContext(), currentSelectDate, Toast.LENGTH_SHORT).show();
+                readData(polygonType, currentSelectDate);
             }
         });
 
@@ -107,6 +112,21 @@ public class CalendarActivity extends AppCompatActivity {
         }
     }
 
+    public static String parsePickerDate(int Year, int Month, int day) {
+
+        String sYear = String.valueOf(Year);
+        String sMonth = String.valueOf((Month + 1));
+        String sDay = String.valueOf(day);
+
+        if (sMonth.length() == 1)
+            sMonth = "0" + sMonth;
+
+        if (sDay.length() == 1)
+            sDay = "0" + sDay;
+
+        return sYear + "-" + sMonth + "-" + sDay;
+    }
+
     public void addItem(){
         AlertDialog.Builder ad = new AlertDialog.Builder(CalendarActivity.this);
         ad.setTitle("일정 추가");
@@ -136,14 +156,15 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     public void saveData(String msg){
+        Log.d("TAG", "saving msg..." + currentSelectDate);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myRef = database.getReference("users").child(user.getUid());
-        myRef.child(polygonType).child(date).setValue(msg);
-
+        myRef.child(polygonType).child(currentSelectDate).setValue(msg);
     }
 
     public void readData(String type, String date){
+        titleView.setText(date);
         //데이터를 불러와 세팅
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -153,7 +174,7 @@ public class CalendarActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     String msg = dataSnapshot.getValue(String.class);
-                    textView.setText("  " + msg);
+                    textView.setText("   " + msg);
                 }
 
             }
