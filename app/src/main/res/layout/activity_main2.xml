@@ -16,15 +16,15 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/Theme.AppCompat.Light"/>
 
-    <EditText
-        android:id="@+id/titleEdit"
+    <Button
+        android:id="@+id/titleEditBtn"
         android:layout_width="300dp"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:hint="목표를 입력하세요"
         android:textSize="30dp"
         android:visibility="visible"/>
@@ -32,13 +32,12 @@
     <TextView
         android:id="@+id/titleView"
         android:layout_width="300dp"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
-        android:text="목표"
+        android:layout_marginTop="80dp"
         android:textSize="30dp"
         android:visibility="invisible"/>
 
@@ -49,10 +48,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="170dp"
         android:background="@drawable/button_background"
         android:text="건강"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:onClick="mOnClick"
+        android:visibility="visible"/>
 
     <Button
         android:id="@+id/btnPolygonWork"
@@ -66,7 +67,9 @@
         app:layout_constraintHorizontal_bias="0.05"
         android:background="@drawable/button_background"
         android:text="일"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:onClick="mOnClick"
+        android:visibility="visible"/>
 
     <Button
         android:id="@+id/btnPolygonSocial"
@@ -80,7 +83,9 @@
         app:layout_constraintHorizontal_bias="0.9"
         android:background="@drawable/button_background"
         android:text="사람"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:onClick="mOnClick"
+        android:visibility="visible"/>
 
     <Button
         android:id="@+id/btnPolygonPlay"
@@ -95,6 +100,7 @@
         android:background="@drawable/button_background"
         android:text="놀이"
         android:textSize="20dp"
+        android:onClick="mOnClick"
         android:visibility="invisible"/>
 
     <Button
@@ -110,6 +116,7 @@
         android:background="@drawable/button_background"
         android:text="취미"
         android:textSize="20dp"
+        android:onClick="mOnClick"
         android:visibility="invisible"/>
 
     <Button
@@ -125,6 +132,7 @@
         android:background="@drawable/button_background"
         android:text="자신"
         android:textSize="20dp"
+        android:onClick="mOnClick"
         android:visibility="invisible"/>
     
     <com.android.yunbumhan.polygoal.Polygon
