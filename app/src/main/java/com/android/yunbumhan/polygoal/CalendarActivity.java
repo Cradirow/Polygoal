@@ -1,6 +1,10 @@
 package com.android.yunbumhan.polygoal;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,8 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    TextView text1 = findViewById(R.id.text1);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +38,14 @@ public class CalendarActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.calendarToolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Polygoal");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_trending_flat_black_48dp);
+
+        if(getSupportActionBar()!=null){
+            Drawable drawable= getResources().getDrawable(R.drawable.ic_trending_flat_black_48dp);
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            Drawable newDrawable = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 80, 120, true));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(newDrawable);
+        }
 
         Intent intent = getIntent();
         int type = intent.getExtras().getInt("type");
@@ -52,7 +60,8 @@ public class CalendarActivity extends AppCompatActivity {
             case 5: polygonType = "Activity"; break;
             case 6: polygonType = "Myself"; break;
         }
-        readData(polygonType, date);
+        Log.d("TAG", date + ", " + polygonType);
+        //readData(polygonType, date);
     }
 
     @Override
@@ -65,7 +74,7 @@ public class CalendarActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
-            case R.id.homeAsUp:
+            case android.R.id.home:
                 finish();
                 return true;
             case R.id.action_add:
@@ -84,24 +93,14 @@ public class CalendarActivity extends AppCompatActivity {
         myRef.child("Type").child(type).child(date).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String msg = dataSnapshot.getValue(String.class);
-                if(msg != null) {
-                    text1.setText(msg);
-                }
+                //String msg = dataSnapshot.getValue(String.class);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-    }
-
-    public void mOnClick(View v){
-        switch(v.getId()){
-            case R.id.addBtn:
-                //addNewMsg();
-                break;
-        }
     }
 
 }
