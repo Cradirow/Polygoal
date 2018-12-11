@@ -107,9 +107,9 @@ public class Polygon extends View {
         Log.d("TAG", "user polygon");
         String[] array = num.split(",");
         float a,b,c;
-        a = Float.parseFloat(array[0]) + 50;
-        b = Float.parseFloat(array[1]) + 50;
-        c = Float.parseFloat(array[2]) + 50;
+        a = Float.parseFloat(array[0])*5 + 10;
+        b = Float.parseFloat(array[1])*5 + 10;
+        c = Float.parseFloat(array[2])*5 + 10;
 
         mPath.moveTo(width, height - a);
         mPath.lineTo(width - b, height + b);

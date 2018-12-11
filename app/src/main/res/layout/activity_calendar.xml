@@ -18,7 +18,16 @@
         app:popupTheme="@style/Theme.AppCompat.Light"/>
 
     <CalendarView
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:background="#FFBC1D"/>
 
 </LinearLayout>

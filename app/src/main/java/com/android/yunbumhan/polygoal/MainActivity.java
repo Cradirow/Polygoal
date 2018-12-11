@@ -142,9 +142,9 @@ public class MainActivity extends AppCompatActivity {
         conditionRef.child(userId).child("Recent").setValue("0,0,0");
         conditionRef.child(userId).child("Polygon").child(date).setValue("0,0,0");
 
-        conditionRef.child(userId).child("Physical").child(date).child("1").setValue("");
-        conditionRef.child(userId).child("Work").child(date).child("1").setValue("");
-        conditionRef.child(userId).child("Social").child(date).child("1").setValue("");
+        conditionRef.child(userId).child("Physical").child(date).setValue("");
+        conditionRef.child(userId).child("Work").child(date).setValue("");
+        conditionRef.child(userId).child("Social").child(date).setValue("");
     }
 
 }

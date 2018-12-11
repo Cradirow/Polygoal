@@ -49,6 +49,7 @@ public class Main2Activity extends AppCompatActivity {
     DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
     private String currentDate;
     private String currentPolygonNumbers;
+    private String recentPolygon;
 
     private FirebaseDatabase database;
     private FirebaseUser user;
@@ -109,8 +110,8 @@ public class Main2Activity extends AppCompatActivity {
         weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(DateTime dateTime) {
-                //Toast.makeText(Main2Activity.this, dateTime.toString(fmt), Toast.LENGTH_SHORT).show();
                 currentDate = dateTime.toString(fmt);
+                calculatePolygon();
             }
         });
         DateTime dateTime = new DateTime();
@@ -132,7 +133,7 @@ public class Main2Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentPolygonNumbers = dataSnapshot.getValue(String.class);
                 Log.d("TAG", "read success " + currentPolygonNumbers);
-                drawPolygon(currentPolygonNumbers);
+                if(currentPolygonNumbers != null) drawPolygon(currentPolygonNumbers);
             }
 
             @Override
@@ -145,11 +146,23 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String title = dataSnapshot.getValue(String.class);
-                if(title.length() != 0){
+                if(title != "."){
                     titleView.setText(title);
                     titleView.setVisibility(View.VISIBLE);
                     editBtn.setVisibility(View.INVISIBLE);
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        //get recent polygon
+        myRef.child("Recent").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                recentPolygon = dataSnapshot.getValue(String.class);
             }
 
             @Override
@@ -191,6 +204,28 @@ public class Main2Activity extends AppCompatActivity {
             myRef.child("Title").setValue(title);
             Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void calculatePolygon(){
+
+        myRef.child("Polygon").child(currentDate).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    currentPolygonNumbers = dataSnapshot.getValue(String.class);
+                    Log.d("TAG", "read success " + currentPolygonNumbers);
+                    drawPolygon(currentPolygonNumbers);
+                }else{
+                    Log.d("TAG", "no data!");
+                    myRef.child("Polygon").child(currentDate).setValue(recentPolygon);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void drawPolygon(String currentPolygonNumbers){
