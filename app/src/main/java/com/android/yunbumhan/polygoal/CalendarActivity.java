@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +36,8 @@ public class CalendarActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.calendarToolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Polygoal");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_trending_flat_black_48dp);
 
         Intent intent = getIntent();
         int type = intent.getExtras().getInt("type");
@@ -47,7 +53,27 @@ public class CalendarActivity extends AppCompatActivity {
             case 6: polygonType = "Myself"; break;
         }
         readData(polygonType, date);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.calendar_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.homeAsUp:
+                finish();
+                return true;
+            case R.id.action_add:
+                Toast.makeText(getApplicationContext(), "행동 추가", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void readData(String type, String date){

@@ -138,8 +138,13 @@ public class MainActivity extends AppCompatActivity {
     private void writeNewUser(String userId, String email, String date){
         //UserData userData = new UserData(email, "000000");
         conditionRef.child(userId).child("Email").setValue(email);
-        conditionRef.child(userId).child("Email").setValue(email);
-        conditionRef.child(userId).child("Polygon").child(date).setValue("000");
+        conditionRef.child(userId).child("Title").setValue("");
+        conditionRef.child(userId).child("Recent").setValue("0,0,0");
+        conditionRef.child(userId).child("Polygon").child(date).setValue("0,0,0");
+
+        conditionRef.child(userId).child("Physical").child(date).child("1").setValue("");
+        conditionRef.child(userId).child("Work").child(date).child("1").setValue("");
+        conditionRef.child(userId).child("Social").child(date).child("1").setValue("");
     }
 
 }

@@ -188,6 +188,7 @@ public class Main2Activity extends AppCompatActivity {
             //no title.
         }else{
             myRef.child("Title").setValue(title);
+            Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
