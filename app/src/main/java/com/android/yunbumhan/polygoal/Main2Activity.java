@@ -145,7 +145,11 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String title = dataSnapshot.getValue(String.class);
-                if(title.length() != 0) titleView.setText(title);
+                if(title.length() != 0){
+                    titleView.setText(title);
+                    titleView.setVisibility(View.VISIBLE);
+                    editBtn.setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override
