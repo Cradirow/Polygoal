@@ -42,8 +42,8 @@ public class Polygon extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
-        mPaint.setColor(Color.BLACK);
-        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setARGB(255,255,210,80);
+        mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setStrokeWidth(5);
 
@@ -62,21 +62,32 @@ public class Polygon extends View {
         super.onDraw(canvas);
         mCanvas = canvas;
         Path path = new Path();
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLACK);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        paint.setStrokeWidth(10);
+
         DisplayMetrics dm = getResources().getDisplayMetrics();
         float width = dm.widthPixels/2;
         float height = dm.heightPixels/2 + 150;
-        Log.d("TAG", width + ", " + height);
+        //Log.d("TAG", width + ", " + height);
+
         //mCanvas.drawCircle(width, height, 10, mPaint);
         path.moveTo(width, height - width);
         path.lineTo(width/5, height + width/2);
         path.lineTo(width*9/5, height + width/2);
         path.lineTo(width, height-width);
-        mCanvas.drawPath(path, mPaint);
+
+        mCanvas.drawPath(path, paint);
+        mCanvas.drawPath(mPath, mPaint);
     }
 
-    public void draw(int x, int y, String numbers){
-        switch(numbers.length()){
-            case 3: //drawTriangle(x,y,numbers);
+    public void draw(float x, float y, String numbers){
+        String array[] = numbers.split(",");
+        switch(array.length){
+            case 3: drawTriangle(x,y,numbers);
                 break;
             case 4: //drawRectangle(x,y,numbers); break;
             case 5: //drawPentagon(x,y,numbers); break;
@@ -89,42 +100,24 @@ public class Polygon extends View {
     public void drawTriangle(float x, float y, String num){
         //mode = Mode.TRIANGLE;
 
-       // mCanvas.drawCircle(x,y,10, mPaint);
-
-//        Point point1_draw = new Point((int) x, (int) y);
-//        Point point2_draw = new Point((int) x - side, (int) y + height);
-//        Point point3_draw = new Point((int) x + side, (int) y + height);
-//        mPath.moveTo(point1_draw.x, point1_draw.y);
-//        mPath.lineTo(point2_draw.x, point2_draw.y);
-//        mPath.lineTo(point3_draw.x, point3_draw.y);
-//        mPath.lineTo(point1_draw.x, point1_draw.y);
-//
-//        mPath.close();
-//        invalidate();
+        float width = x/2;
+        float height = y/2 + 125;
 
         //user polygon
-//        Log.d("TAG", "user polygon");
-//        y += height * 2/3;
-//        int offset;
-//        String[] array = num.split(",");
-//        for(int i=0; i<3; i++){
-//            offset = (Integer.parseInt(array[i]))*2;
-//            switch(i) {
-//                case 0:
-//                    point1_draw = new Point((int) x, (int) y-offset);
-//                    break;
-//                case 1:
-//                    point2_draw = new Point((int) x - offset, (int) y + offset);
-//                    break;
-//                case 2:
-//                    point3_draw = new Point((int) x + offset, (int) y + offset);
-//                    break;
-//            }
-//        }
-//        mPath.moveTo(point1_draw.x, point1_draw.y);
-//        mPath.lineTo(point2_draw.x, point2_draw.y);
-//        mPath.lineTo(point3_draw.x, point3_draw.y);
-//        mPath.lineTo(point1_draw.x, point1_draw.y);
+        Log.d("TAG", "user polygon");
+        String[] array = num.split(",");
+        float a,b,c;
+        a = Float.parseFloat(array[0]) + 50;
+        b = Float.parseFloat(array[1]) + 50;
+        c = Float.parseFloat(array[2]) + 50;
+
+        mPath.moveTo(width, height - a);
+        mPath.lineTo(width - b, height + b);
+        mPath.lineTo(width + c, height + c);
+        mPath.lineTo(width, height- a);
+        mPath.close();
+        invalidate();
+        Log.d("TAG", "draw end");
     }
 
     public void drawRectangle(float x, float y, String num){

@@ -42,7 +42,7 @@ public class CalendarActivity extends AppCompatActivity {
         if(getSupportActionBar()!=null){
             Drawable drawable= getResources().getDrawable(R.drawable.ic_trending_flat_black_48dp);
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-            Drawable newDrawable = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 80, 120, true));
+            Drawable newDrawable = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 80, 100, true));
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(newDrawable);
         }

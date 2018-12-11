@@ -178,6 +178,7 @@ public class Main2Activity extends AppCompatActivity {
         }
         Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
         intent.putExtra("type", type);
+        intent.putExtra("date", currentDate);
         startActivity(intent);
     }
 
@@ -196,8 +197,8 @@ public class Main2Activity extends AppCompatActivity {
         //draw base polygon
         final Polygon polygon = findViewById(R.id.polygon);
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
+        float width = dm.widthPixels;
+        float height = dm.heightPixels;
         //Log.d("TAG",width + ", " + height);
         polygon.draw(width, height, currentPolygonNumbers);
     }
