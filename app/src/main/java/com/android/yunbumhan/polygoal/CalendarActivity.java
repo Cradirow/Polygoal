@@ -36,10 +36,13 @@ public class CalendarActivity extends AppCompatActivity {
     private TextView textView;
     //private int day;
 
+    private int type;
     private String polygonType;
     private String date;
 
     private String currentSelectDate;
+
+    private String todayPolygon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +78,9 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        int type = intent.getExtras().getInt("type");
-        date = intent.getExtras().getString("date");
+        type = intent.getExtras().getInt("type");
+        date = intent.getExtras().getString("today");
+        todayPolygon = intent.getExtras().getString("polygon");
 
         polygonType = "";
         switch(type){
@@ -160,7 +164,39 @@ public class CalendarActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myRef = database.getReference("users").child(user.getUid());
+        if(currentSelectDate == null) currentSelectDate = date;
         myRef.child(polygonType).child(currentSelectDate).setValue(msg);
+
+        //현재 날짜일 때만 recent, polygon 업데이트
+        if(currentSelectDate == date) {
+            String array[] = todayPolygon.split(",");
+            int data = 0;
+            switch (type) {
+                case 1:
+                    data = Integer.parseInt(array[0]);
+                    data++;
+                    array[0] = String.valueOf(data);
+                    break;
+                case 2:
+                    data = Integer.parseInt(array[1]);
+                    data++;
+                    array[1] = String.valueOf(data);
+                    break;
+                case 3:
+                    data = Integer.parseInt(array[2]);
+                    data++;
+                    array[2] = String.valueOf(data);
+            }
+
+            String str = "";
+            for (int i = 0; i < array.length - 1; i++) {
+                str += array[i] + ",";
+            }
+            str += array[array.length - 1];
+            Log.d("TAG", "saving polygon data.." + str);
+            myRef.child("Polygon").child(date).setValue(str);
+            myRef.child("Recent").setValue(str);
+        }
     }
 
     public void readData(String type, String date){

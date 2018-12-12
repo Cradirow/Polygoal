@@ -104,17 +104,31 @@ public class Polygon extends View {
         float height = y/2 + 125;
 
         //user polygon
-        Log.d("TAG", "user polygon");
         String[] array = num.split(",");
-        float a,b,c;
-        a = Float.parseFloat(array[0])*5 + 10;
-        b = Float.parseFloat(array[1])*5 + 10;
-        c = Float.parseFloat(array[2])*5 + 10;
+        float a,b,c, max, offset;
+        a = Float.parseFloat(array[0]);
+        b = Float.parseFloat(array[1]);
+        c = Float.parseFloat(array[2]);
+        if(a>=b){
+            if(a>=c) max = a;
+            else max = c;
+        }else{
+            if(b>=c) max = b;
+            else max = c;
+        }
+        max += 5;
+        offset = width/max;
 
-        mPath.moveTo(width, height - a);
-        mPath.lineTo(width - b, height + b);
-        mPath.lineTo(width + c, height + c);
-        mPath.lineTo(width, height- a);
+        mPath.reset();
+
+        mPath.moveTo(width, height - a*offset);
+        mPath.lineTo(width - b*offset, height + b*offset);
+        mPath.lineTo(width + c*offset, height + c*offset);
+        mPath.lineTo(width, height- a*offset);
+//        mPath.moveTo(width, height - width * a/max);
+//        mPath.lineTo(width - 4/5*width * b/max, height + width/2 * b/max);
+//        mPath.lineTo(width + 4/5*width * c/max, height + width/2 * c/max);
+//        mPath.lineTo(width, height- width * a/max);
         mPath.close();
         invalidate();
         Log.d("TAG", "draw end");

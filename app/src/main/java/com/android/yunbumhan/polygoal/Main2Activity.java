@@ -47,6 +47,10 @@ public class Main2Activity extends AppCompatActivity {
     private TextView titleView;
 
     DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
+    //오늘 날짜와 polygon을 저장
+    private String today;
+    private String todayPolygon;
+    //주간달력에서 선택한 날짜를 저장
     private String currentDate;
     private String currentPolygonNumbers;
     private String recentPolygon;
@@ -117,6 +121,8 @@ public class Main2Activity extends AppCompatActivity {
         DateTime dateTime = new DateTime();
         currentDate = dateTime.toString(fmt);
 
+        today = dateTime.toString(fmt);
+
         //toolBar settings
         Toolbar myToolbar = findViewById(R.id.toolBar);
         setSupportActionBar(myToolbar);
@@ -170,6 +176,22 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
+        //오늘 폴리곤 정보가 없으면 최근 데이터 저장, 데이터 있으면 오늘 폴리곤 데이터에 저장
+        myRef.child("Polygon").child(today).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    myRef.child("Polygon").child(currentDate).setValue(recentPolygon);
+                }else{
+                    todayPolygon = dataSnapshot.getValue(String.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -191,10 +213,13 @@ public class Main2Activity extends AppCompatActivity {
         }
         Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
         intent.putExtra("type", type);
-        intent.putExtra("date", currentDate);
+//        intent.putExtra("date", currentDate);
+        intent.putExtra("today", today);
+        intent.putExtra("polygon", todayPolygon);
         startActivity(intent);
     }
 
+    //목표 저장
     public void saveTitle(String title){
         Log.d("TAG", "saving title...");
 
@@ -206,6 +231,7 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
+    //주간달력 클릭했을 때 polygon 데이터가 있으면 읽어온다.
     public void calculatePolygon(){
 
         myRef.child("Polygon").child(currentDate).addValueEventListener(new ValueEventListener() {
@@ -215,9 +241,6 @@ public class Main2Activity extends AppCompatActivity {
                     currentPolygonNumbers = dataSnapshot.getValue(String.class);
                     Log.d("TAG", "read success " + currentPolygonNumbers);
                     drawPolygon(currentPolygonNumbers);
-                }else{
-                    Log.d("TAG", "no data!");
-                    myRef.child("Polygon").child(currentDate).setValue(recentPolygon);
                 }
             }
 
@@ -228,6 +251,7 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
+    //선택한 날짜에 맞는 도형 그리기
     public void drawPolygon(String currentPolygonNumbers){
         //draw base polygon
         final Polygon polygon = findViewById(R.id.polygon);
@@ -245,6 +269,7 @@ public class Main2Activity extends AppCompatActivity {
         return true;
     }
 
+    //툴바 설정버튼 클릭시
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -258,6 +283,7 @@ public class Main2Activity extends AppCompatActivity {
         return true;
     }
 
+    //뒤로가기 어플 종료 기능
     @Override
     public void onBackPressed(){
         long tempTime = System.currentTimeMillis();
@@ -272,10 +298,12 @@ public class Main2Activity extends AppCompatActivity {
         }
     }
 
+    //세팅 클릭시
     public void settings(){
         //call intent
     }
 
+    //로그아웃 클릭시
     public void signOut(){
         FirebaseAuth.getInstance().signOut();
 
