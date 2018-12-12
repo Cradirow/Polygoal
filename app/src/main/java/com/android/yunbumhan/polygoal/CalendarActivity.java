@@ -211,8 +211,9 @@ public class CalendarActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     String msg = dataSnapshot.getValue(String.class);
                     textView.setText("   " + msg);
+                }else{
+                    textView.setText("기록이 없습니다.");
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

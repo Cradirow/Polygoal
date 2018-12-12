@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -16,14 +15,14 @@ public class Polygon extends View {
     Canvas mCanvas;
     Path mPath;
 
-    enum Mode{
-        TRIANGLE,
-        RECTANGLE,
-        PENTAGON,
-        HEXAGON
-    }
-
-    private Mode mode;
+//    enum Mode{
+//        TRIANGLE,
+//        RECTANGLE,
+//        PENTAGON,
+//        HEXAGON
+//    }
+//
+//    private Mode mode;
 
     private int mViewWidth = 0;
     private int mViewHeight = 0;
@@ -89,9 +88,9 @@ public class Polygon extends View {
         switch(array.length){
             case 3: drawTriangle(x,y,numbers);
                 break;
-            case 4: //drawRectangle(x,y,numbers); break;
-            case 5: //drawPentagon(x,y,numbers); break;
-            case 6: //drawHexagon(x,y,numbers); break;
+//            case 4: drawRectangle(x,y,numbers); break;
+//            case 5: drawPentagon(x,y,numbers); break;
+//            case 6: drawHexagon(x,y,numbers); break;
             default: Log.d("TAG", "polygon number errors.");
         }
     }
@@ -134,16 +133,16 @@ public class Polygon extends View {
         Log.d("TAG", "draw end");
     }
 
-    public void drawRectangle(float x, float y, String num){
-
-    }
-
-    public void drawPentagon(float x, float y, String num){
-
-    }
-
-    public void drawHexagon(float x, float y, String num){
-
-    }
+//    public void drawRectangle(float x, float y, String num){
+//
+//    }
+//
+//    public void drawPentagon(float x, float y, String num){
+//
+//    }
+//
+//    public void drawHexagon(float x, float y, String num){
+//
+//    }
 
 }
