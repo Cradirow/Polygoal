@@ -25,7 +25,9 @@ You can customize the triangle point subject.
 
 ## Screenshots
 <div>
-
+![screenshot_20181213-102420](https://user-images.githubusercontent.com/26480389/49917075-0896d700-fee1-11e8-9627-a854575f9131.png)
+![screenshot_20181213-102456](https://user-images.githubusercontent.com/26480389/49917076-092f6d80-fee1-11e8-990f-1d820e659575.png)
+![screenshot_20181213-102522](https://user-images.githubusercontent.com/26480389/49917077-092f6d80-fee1-11e8-8181-0780d8897845.png)
 </div>
 
 ## Schedule
