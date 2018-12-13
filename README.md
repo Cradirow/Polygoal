@@ -19,8 +19,11 @@ Clone the directory, make sure sync with your firebase console.
 
 You can customize the triangle point subject. 
 
+`app -> res -> layout -> activity2_main.xml`
+
 ## Functions
 - Google Login (via firebase)
+- Google realtime database syncronization.
 - Select weekly date, draw your polygons.
 - Check your each subject calendar, and add the event.
 
