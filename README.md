@@ -7,7 +7,7 @@ Want to accomplish your goals?
 
 Remember, the important thing is not only acheiving but also 'how to'.
 
-Use the app for balance the important aspect of your life.
+Use the app for balancing the important aspect of your life.
 
 Basic aspects are Physical, Work and Social.
 
